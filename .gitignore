@@ -30,3 +30,20 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+keys/
+
+# Kaggle credentials
+# As mentioned in prep_ambiente/README.md, never commit credentials.
+prep_ambiente/kaggle.json
+
+
+# Python
+###################
+
+# Virtual Environment
+.venv/
+venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
