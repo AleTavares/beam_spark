@@ -61,13 +61,28 @@ A iniciativa visa embasar a escolha tecnológica com evidências concretas, perm
 
 ---
 
+## Estrutura do Projeto
+
+O projeto está organizado da seguinte forma para separar a preparação do ambiente, a infraestrutura e a lógica da POC:
+
+```
+/
+├── infra/
+│   ├── Dockerfile
+│   └── README.md  (➡️ Guia para o ambiente Docker)
+├── prep_ambiente/
+│   ├── download_dataset.py
+│   ├── geraDados.py
+│   ├── requirements.txt
+│   └── README.md  (➡️ Guia para o ambiente Local)
+├── .gitignore
+├── docker-compose.yml
+└── README.md (Este arquivo)
+```
+
 ## Setup e Execução do Ambiente
 
-Todos os scripts e instruções para preparar o ambiente, instalar dependências e baixar o dataset de teste estão localizados na pasta `prep_ambiente`.
-
-**➡️ Acesse o guia de preparação do ambiente local**
-
-Como alternativa à configuração manual, você pode usar um ambiente Docker pré-configurado. As instruções estão na pasta `infra`. **➡️ Acesse o guia de preparação do ambiente Docker**
+Para preparar o ambiente e executar a POC, siga as instruções detalhadas nos guias linkados na estrutura do projeto acima. Você pode optar pelo setup **local** (manual) ou pelo ambiente **Docker** (recomendado).
 
 ---
 
