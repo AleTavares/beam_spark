@@ -11,7 +11,7 @@ except ImportError:
     print("❌ Error: The 'kaggle' library is not installed.")
     print("Please run: pip install -r requirements.txt --upgrade --force-reinstall")
     sys.exit(1)
-# --- Fim da Verificação ---
+# --- Fim da Verificação da Lib ---
 
 
 def download_sod_2023_dataset(download_path="./data/raw"):
@@ -47,7 +47,7 @@ def download_sod_2023_dataset(download_path="./data/raw"):
         print("\n✅ Download e descompactação concluídos com sucesso!")
 
         # Renomeia o arquivo para um nome mais simples
-        original_file = destination / "State of Data - Brazil 2023.csv"
+        original_file = destination / "State_of_data_BR_2023_Kaggle - df_survey_2023.csv"
         new_file = destination / "state_of_data_2023.csv"
 
         if original_file.exists():

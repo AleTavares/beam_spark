@@ -56,3 +56,37 @@ python download_dataset.py
 ```
 
 Isso baixará o dataset para a pasta `data/raw/` (localizada na raiz do projeto), preparando-o para as próximas etapas da POC.
+
+## 4. Gere os Dados de Teste em Diferentes Formatos
+
+Após baixar o dataset base, utilize o ambiente Docker com Spark para gerar os arquivos de teste nos formatos e tamanhos desejados.
+
+### a. Inicie o ambiente Docker
+
+A partir da raiz do projeto, execute:
+
+```bash
+docker-compose up -d
+```
+
+Isso irá subir o cluster Spark definido em `infra/docker-compose.yml`.
+
+### b. Acesse o container Spark
+
+Identifique o nome do container Spark master (exemplo: `beam_spark-spark-master-1`). Para acessar o container, execute:
+
+```bash
+docker exec -it beam_spark-spark-master-1 bash
+```
+
+> Substitua o nome do container conforme o que aparecer em `docker ps`.
+
+### c. Execute o script de geração de dados via Spark
+
+Dentro do container, navegue até a pasta de preparação e execute:
+
+```bash
+cd /app/prep_ambiente # Garanta que está no diretório correto
+```
+
+O script irá ler o arquivo CSV base e gerar versões de 1GB e 10GB nos formatos Parquet, CSV, JSON, ORC e Delta, salvando em `/app/prep_ambiente/data/processed/`.
