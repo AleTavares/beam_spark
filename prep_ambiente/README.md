@@ -63,10 +63,10 @@ Após baixar o dataset base, utilize o ambiente Docker com Spark para gerar os a
 
 ### a. Inicie o ambiente Docker
 
-A partir da raiz do projeto, execute:
+A partir da **raiz do projeto**, execute:
 
 ```bash
-docker-compose up -d
+docker-compose up --build
 ```
 
 Isso irá subir o cluster Spark definido em `infra/docker-compose.yml`.
@@ -86,7 +86,22 @@ docker exec -it beam_spark-spark-master-1 bash
 Dentro do container, navegue até a pasta de preparação e execute:
 
 ```bash
-cd /app/prep_ambiente # Garanta que está no diretório correto
+cd /app/prep_ambiente
+spark-submit \
+  --packages io.delta:delta-core_2.12:2.4.0 \
+  --conf "spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension" \
+  --conf "spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog" \
+  geraDados.py --formats parquet csv
 ```
 
-O script irá ler o arquivo CSV base e gerar versões de 1GB e 10GB nos formatos Parquet, CSV, JSON, ORC e Delta, salvando em `/app/prep_ambiente/data/processed/`.
+> Para gerar apenas determinados formatos, utilize o parâmetro `--formats` seguido dos formatos desejados.  
+> Exemplos:
+>
+> - Gerar apenas Parquet e Delta:
+>   ```bash
+>   spark-submit geraDados.py --formats parquet delta
+>   ```
+> - Gerar todos os formatos (Parquet, CSV, JSON, ORC, Delta):
+>   ```bash
+>   spark-submit geraDados.py --formats parquet csv json orc delta
+>   ```
